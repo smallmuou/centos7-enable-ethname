@@ -125,6 +125,7 @@ enable_eth() {
         if [ -z "`cat $file|sed -n '/GRUB_CMDLINE_LINUX/p'|sed -n '/net.ifnames=0 biosdevname=0/p'`" ];then
             sed -i '/GRUB_CMDLINE_LINUX/s/="/="net.ifnames=0 biosdevname=0 /' $file
         fi
+        grub2-mkconfig -o /boot/grub2/grub.cfg
     else
         error "$file does not exit. can not enable eth name"
         exit 
