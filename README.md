@@ -21,4 +21,4 @@ sudo /bin/bash ./centos7-enable-ethname.sh
 
 ### LICENSE
 
-The script follow MIT LICENSE.
+The script follows MIT LICENSE.
