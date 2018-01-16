@@ -1,6 +1,6 @@
 # centos7-enable-ethname
 
-The script uses to enable eth name under centos7.
+>The script uses to enable eth name under centos7.
 
 ### Usage 
 
