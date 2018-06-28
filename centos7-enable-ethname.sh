@@ -111,12 +111,14 @@ change_ifcfg() {
     local base="/etc/sysconfig/network-scripts/ifcfg-"
     local srcfile=$base"$1"
     local dstfile=$base"eth"$2
-    if [ -f $srcfile ];then
+    if [ -f $dstfile ];then
+        info "already exist $dstfile"
+    elif [ -f $srcfile ];then
         info "rename $srcfile to $dstfile ..."
         sed -i "s/^NAME=.*/NAME=eth$2/" $srcfile
         sed -i "s/^DEVICE=.*/DEVICE=eth$2/" $srcfile
         mv $srcfile $dstfile
-    else 
+    else
         info "not found $srcfile, generate $dstfile ..."
 cat << EOF > $dstfile
 TYPE=Ethernet
