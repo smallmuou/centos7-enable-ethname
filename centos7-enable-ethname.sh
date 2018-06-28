@@ -116,11 +116,29 @@ change_ifcfg() {
         sed -i "s/^NAME=.*/NAME=eth$2/" $srcfile
         sed -i "s/^DEVICE=.*/DEVICE=eth$2/" $srcfile
         mv $srcfile $dstfile
+    else 
+cat << EOF > $dstfile
+TYPE=Ethernet
+DEVICE=eth$2
+ONBOOT=yes
+BOOTPROTO=dhcp
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_FAILURE_FATAL=no
+NAME=eth$2
+EOF
     fi
 }
 
 enable_eth() {
-    local file='/etc/sysconfig/grub'
+    local file='/etc/default/grub'
     if [ -f $file ];then
         if [ -z "`cat $file|sed -n '/GRUB_CMDLINE_LINUX/p'|sed -n '/net.ifnames=0 biosdevname=0/p'`" ];then
             sed -i '/GRUB_CMDLINE_LINUX/s/="/="net.ifnames=0 biosdevname=0 /' $file
