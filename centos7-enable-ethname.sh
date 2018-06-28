@@ -117,6 +117,7 @@ change_ifcfg() {
         sed -i "s/^DEVICE=.*/DEVICE=eth$2/" $srcfile
         mv $srcfile $dstfile
     else 
+        info "not found $srcfile, generate $dstfile ..."
 cat << EOF > $dstfile
 TYPE=Ethernet
 DEVICE=eth$2
